@@ -1,0 +1,157 @@
+#%RAML 1.0
+title: sapi
+
+version: v1
+
+documentation:
+  - !include documentation.raml
+securitySchemes:
+  auth:
+   type: basic
+
+securedBy:
+  - auth
+
+
+traits:
+  headers_trait:
+   headers:
+      client_id:
+        type: string
+        required: true
+      client_secret:
+        type: string
+        required: true
+
+  qpam_trait:
+    queryString:
+      qpam
+
+types:
+  qpam:
+        minProperties: 1
+        properties:
+         city?:
+          type: string
+         state?:
+          type: string
+    
+
+/resource1:
+  get:
+    is:
+      - headers_trait
+      - qpam_trait
+
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {"message" : "200"}
+      400:
+        body:
+          application/json:
+            example:
+              {"message" : "400"}
+
+
+  post:
+    headers:
+      client_id:
+        type: string
+        required: true
+      client_secret:
+        type: string
+        required: true
+    queryString:
+      qpam
+    body:
+      application/json:
+        type: array
+        example: 
+           
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {"message" : "200"}
+      400:
+        body:
+          application/json:
+            example:
+              {"message" : "400"}
+
+
+/resource2:
+  get:
+    headers:
+      client_id:
+        type: string
+        required: true
+      client_secret:
+        type: string
+        required: true
+    queryString:
+      qpam
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {"message" : "200"}
+      400:
+        body:
+          application/json:
+            example:
+              {"message" : "400"}
+
+
+  post:
+    headers:
+      client_id:
+        type: string
+        required: true
+      client_secret:
+        type: string
+        required: true
+    queryString:
+      qpam
+    body:
+      application/json:
+        type: array
+        example: 
+           
+    responses:
+      200:
+        body:
+          application/json:
+            example:
+              {"message" : "200"}
+      400:
+        body:
+          application/json:
+            example:
+              {"message" : "400"}
+      
+
+    
+   
+   
+/health:
+   get:
+     responses:
+       200:
+         body:
+           application/json:
+             example:
+               {"message" : "200"}
+       400:
+         body:
+           application/json:
+             example:
+               {"message" : "400"}
+
+
+
